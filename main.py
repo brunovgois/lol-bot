@@ -2,10 +2,15 @@ import requests
 import time
 import json
 from datetime import datetime
+import settings
 
 class TelegramBot:
+
+  def getToken(self):
+    return settings.token
+  
   def __init__(self):
-    token = '1494075568:AAE6Wsi24XI762ntKvLTH2m30M4vnLYv8k4'
+    token = self.getToken()
     self.url_base = 'https://api.telegram.org/bot' + token
 
   def Initiate(self):
@@ -40,20 +45,13 @@ class TelegramBot:
 
   def create_answer(self, message, first_interaction):
     if(first_interaction):
-      return "eu nao funciono direito"
+      return 'first Message'
     else:
-      return 'oi'
+      return 'hello'
 
   def responder(self, resposta, chat_id):
     link_envio = self.url_base + '/sendMessage?chat_id=' + str(chat_id) + '&text=' + resposta
     requests.get(link_envio)
 
-
-
 bot = TelegramBot()
 bot.Initiate()
-
-
-
-  #TODO loop semanal para crawlear o site de patch notes
-
